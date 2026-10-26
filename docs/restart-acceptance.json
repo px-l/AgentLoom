@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-26",
+  "runId": "01a49675-f3ee-47f5-ae25-f68d6b8bf094",
+  "apiAndWorkerRestart": true,
+  "sameRunResumed": true,
+  "status": "completed",
+  "duplicateApprovalStatus": 409,
+  "toolCallsBeforeAndAfter": 1,
+  "linkedChunk": "example-doc-0-0",
+  "sseReplayEvents": 23,
+  "markdownDownload": true
+}

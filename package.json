@@ -1,0 +1,1 @@
+{"name":"agentloom","private":true,"version":"0.1.0","packageManager":"pnpm@11.5.1","scripts":{"dev":"pnpm --filter @agentloom/web dev","build":"pnpm --filter @agentloom/protocol build && pnpm --filter @agentloom/web build","typecheck":"pnpm -r typecheck","test":"pnpm --filter @agentloom/web test","perf":"pnpm --filter @agentloom/web perf"}}

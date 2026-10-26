@@ -1,0 +1,47 @@
+services:
+  db:
+    image: pgvector/pgvector:0.8.2-pg17
+    environment:
+      POSTGRES_DB: agentloom
+      POSTGRES_USER: agentloom
+      POSTGRES_PASSWORD: agentloom
+    ports: ["127.0.0.1:5438:5432"]
+    volumes: ["postgres:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agentloom"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  migrate:
+    build: ./services/api
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://agentloom:agentloom@db:5432/agentloom
+    command: ["sh", "-c", "uv run --frozen alembic upgrade head && uv run --frozen python -m agentloom.seed"]
+    depends_on:
+      db: {condition: service_healthy}
+  api:
+    build: ./services/api
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://agentloom:agentloom@db:5432/agentloom
+    command: ["uv", "run", "--frozen", "uvicorn", "agentloom.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  worker:
+    build: ./services/api
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://agentloom:agentloom@db:5432/agentloom
+    command: ["uv", "run", "--frozen", "python", "-m", "agentloom.worker"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports: ["127.0.0.1:5173:80"]
+    depends_on: [api]
+volumes:
+  postgres:

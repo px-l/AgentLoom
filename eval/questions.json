@@ -1,0 +1,10 @@
+[
+ {"question":"人工审批如何在重启后恢复？","relevantChunkIds":["example-doc-0-0"]},
+ {"question":"重复审批会怎样？","relevantChunkIds":["example-doc-0-0"]},
+ {"question":"SSE 断线后怎样补拉事件？","relevantChunkIds":["example-doc-1-0"]},
+ {"question":"网络重试如何使用幂等键？","relevantChunkIds":["example-doc-1-0"]},
+ {"question":"检查点能否保证外部副作用 exactly-once？","relevantChunkIds":["example-doc-1-0"]},
+ {"question":"知识库支持哪些文件？扫描 PDF 能 OCR 吗？","relevantChunkIds":["example-doc-2-0"]},
+ {"question":"切换 Embedding 后需要做什么？","relevantChunkIds":["example-doc-2-0"]},
+ {"question":"Recall@k 能代表最终回答质量吗？","relevantChunkIds":["example-doc-2-0"]}
+]
